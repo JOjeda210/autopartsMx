@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPartes MX - Catálogo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/img/css/catalogo.css">
+
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="logo"><i class="fas fa-car"></i></span>
+                AutoPartes MX
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="catalogo.html">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-list-alt me-3"></i>Nuestro Catálogo</h1>
+            <p>Encuentra las mejores refacciones para tu vehículo</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="text-center mb-4">
+            <button class="btn-toggle" onclick="toggleTable()">
+                <i class="fas fa-table me-2"></i><span id="toggleText">Mostrar Tabla Completa</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Datos de productos (usados para generar la tabla)
+        const productos = [
+            {id: '001', nombre: 'Filtro de Aceite Premium', categoria: 'Filtros', marca: 'Universal', precio: '$150.00 MXN', stockHtml: '<i class="fas fa-check-circle text-success"></i> Disponible'},
+            {id: '002', nombre: 'Balatas Delanteras Cerámicas', categoria: 'Frenos', marca: 'Toyota, Honda, Nissan', precio: '$850.00 MXN', stockHtml: '<i class="fas fa-check-circle text-success"></i> Disponible'},
+            {id: '003', nombre: 'Batería 12V 60Ah', categoria: 'Sistema Eléctrico', marca: 'Universal', precio: '$1,800.00 MXN', stockHtml: '<i class="fas fa-check-circle text-success"></i> Disponible'},
+            {id: '004', nombre: 'Amortiguadores Gas Traseros', categoria: 'Suspensión', marca: 'Ford, Chevrolet, Dodge', precio: '$2,400.00 MXN', stockHtml: '<i class="fas fa-exclamation-triangle text-warning"></i> Pocas unidades'},
+            {id: '005', nombre: 'Bujías Iridium (4 pzas)', categoria: 'Motor', marca: 'Universal', precio: '$650.00 MXN', stockHtml: '<i class="fas fa-check-circle text-success"></i> Disponible'},
+            {id: '006', nombre: 'Kit de Clutch Completo', categoria: 'Transmisión', marca: 'Volkswagen, Seat', precio: '$3,200.00 MXN', stockHtml: '<i class="fas fa-check-circle text-success"></i> Disponible'},
+            {id: '007', nombre: 'Alternador Reconstruido', categoria: 'Sistema Eléctrico', marca: 'Toyota, Nissan', precio: '$2,100.00 MXN', stockHtml: '<i class="fas fa-check-circle text-success"></i> Disponible'}
+        ];
+
+        function toggleTable() {
+            const section = document.getElementById('tableSection');
+            const toggleText = document.getElementById('toggleText');
+            if (!section) return;
+            if (section.style.display === 'none' || section.style.display === '') {
+                populateTableIfNeeded();
+                section.style.display = 'block';
+                toggleText.textContent = 'Ocultar Tabla Completa';
+                section.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                section.style.display = 'none';
+                toggleText.textContent = 'Mostrar Tabla Completa';
+            }
+        }
+
+        function populateTableIfNeeded() {
+            const tbody = document.querySelector('#tableSection table tbody');
+            if (!tbody || tbody.dataset.populated === '1') return;
+            productos.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${p.id}</td>
+                    <td><strong>${p.nombre}</strong></td>
+                    <td><span class="category-badge">${p.categoria}</span></td>
+                    <td>${p.marca}</td>
+                    <td><span class="price-badge">${p.precio}</span></td>
+                    <td>${p.stockHtml}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            tbody.dataset.populated = '1';
+        }
+
+        // Función simple para los botones "Agregar al Carrito"
+        function agregarCarrito(producto) {
+            alert(producto + ' agregado al carrito.');
+        }
+
+        // Asegurarse de que la tabla esté oculta al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.getElementById('tableSection');
+            if (section) section.style.display = 'none';
+        });
+    </script>
+
+        <div id="tableSection" style="display: none;">
+            <h2 class="section-title">Lista Completa de Productos</h2>
+            <div class="table-container">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre del Producto</th>
+                                <th>Categoría</th>
+                                <th>Marca Compatible</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>001</td>
+                                <td><strong>Filtro de Aceite Premium</strong></td>
+                                <td><span class="category-badge">Filtros</span></td>
+                                <td>Universal</td>
+                                <td><span class="price-badge">$150.00 MXN</span></td>
+                                <td><i class="fas fa-check-circle text-success"></i> Disponible</td>
+                            </tr>
+                            <tr>
+                                <td>002</td>
+                                <td><strong>Balatas Delanteras Cerámicas</strong></td>
+                                <td><span class="category-badge">Frenos</span></td>
+                                <td>Toyota, Honda, Nissan</td>
+                                <td><span class="price-badge">$850.00 MXN</span></td>
+                                <td><i class="fas fa-check-circle text-success"></i> Disponible</td>
+                            </tr>
+                            <tr>
+                                <td>003</td>
+                                <td><strong>Batería 12V 60Ah</strong></td>
+                                <td><span class="category-badge">Sistema Eléctrico</span></td>
+                                <td>Universal</td>
+                                <td><span class="price-badge">$1,800.00 MXN</span></td>
+                                <td><i class="fas fa-check-circle text-success"></i> Disponible</td>
+                            </tr>
+                            <tr>
+                                <td>004</td>
+                                <td><strong>Amortiguadores Gas Traseros</strong></td>
+                                <td><span class="category-badge">Suspensión</span></td>
+                                <td>Ford, Chevrolet, Dodge</td>
+                                <td><span class="price-badge">$2,400.00 MXN</span></td>
+                                <td><i class="fas fa-exclamation-triangle text-warning"></i> Pocas unidades</td>
+                            </tr>
+                            <tr>
+                                <td>005</td>
+                                <td><strong>Bujías Iridium (4 pzas)</strong></td>
+                                <td><span class="category-badge">Motor</span></td>
+                                <td>Universal</td>
+                                <td><span class="price-badge">$650.00 MXN</span></td>
+                                <td><i class="fas fa-check-circle text-success"></i> Disponible</td>
+                            </tr>
+                            <tr>
+                                <td>006</td>
+                                <td><strong>Kit de Clutch Completo</strong></td>
+                                <td><span class="category-badge">Transmisión</span></td>
+                                <td>Volkswagen, Seat</td>
+                                <td><span class="price-badge">$3,200.00 MXN</span></td>
+                                <td><i class="fas fa-check-circle text-success"></i> Disponible</td>
+                            </tr>
+                            <tr>
+                                <td>007</td>
+                                <td><strong>Alternador Reconstruido</strong></td>
+                                <td><span class="category-badge">Sistema Eléctrico</span></td>
+                                <td>Toyota, Nissan</td>
+                                <td><span class="price-badge">$2,100.00 MXN</span></td>
+                                <td><i class="fas fa-check-circle text-success"></i> Disponible</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title mt-5">Productos Destacados</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-img-top">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Filtro de Aceite Premium</h5>
+                        <p class="card-text">Filtro de aceite de alta eficiencia para mayor protección del motor.</p>
+                        <p><strong>Precio: $150.00 MXN</strong></p>
+                        <button class="btn btn-add w-100" onclick="agregarCarrito('Filtro de Aceite')">
+                            <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-img-top" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-brake-warning"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Balatas Cerámicas</h5>
+                        <p class="card-text">Balatas de cerámica de alto rendimiento con menor ruido y polvo.</p>
+                        <p><strong>Precio: $850.00 MXN</strong></p>
+                        <button class="btn btn-add w-100" onclick="agregarCarrito('Balatas Cerámicas')">
+                            <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-img-top" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-car-battery"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Batería 12V 60Ah</h5>
+                        <p class="card-text">Batería de alta capacidad con garantía de 2 años.</p>
+                        <p><strong>Precio: $1,800.00 MXN</strong></p>
+                        <button class="btn btn-add w-100" onclick="agregarCarrito('Batería 12V')">
+                            <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-img-top" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Amortiguadores Gas</h5>
+                        <p class="card-text">Amortiguadores a gas para mejor confort y estabilidad.</p>
+                        <p><strong>Precio: $2,400.00 MXN</strong></p>
+                        <button class="btn btn-add w-100" onclick="agregarCarrito('Amortiguadores')">
+                            <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-img-top" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Bujías Iridium</h5>
+                        <p class="card-text">Juego de 4 bujías de iridium para mejor ignición y economía.</p>
+                        <p><strong>Precio: $650.00 MXN</strong></p>
+                        <button class="btn btn-add w-100" onclick="agregarCarrito('Bujías Iridium')">
+                            <i class="fas fa-shopping-cart me-2"></i>Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-img-top" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Kit de Clutch</h5>
+                        <div class="card-text">Kit completo con disco, prensa y collarín para transmisión manual.</div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div> 
+
+    <footer class="footer bg-dark text-white w-100 py-4">
+        <div class="container">
+            <a href="#" onclick="alert('Aviso de Privacidad\n\nAutoPartes MX es responsable del tratamiento de tus datos personales.\n' +
+            'La información recabada (nombre, correo, teléfono y mensaje) se usa solo para dar seguimiento a tu solicitud.\n' +
+            'Tus datos no se comparten con terceros.\n\n' +
+            'Para ejercer tus derechos ARCO o más información, escribe a: privacidad@autopartesmx.com');" class="text-white">
+                Aviso de Privacidad
+            </a>
+
+            <p class="mt-2 mb-0">&copy; 2025 AutoPartes MX. Todos los derechos reservados.</p>
+            <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Cancún, Quintana Roo, México</p>
+        </div>
+    </footer>
+</body>
+</html>

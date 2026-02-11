@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPartes MX - Contacto</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/img/css/contacto.css">
+    
+
+    </head>
+
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="logo"><i class="fas fa-car"></i></span>
+                AutoPartes MX
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalogo.html">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-envelope me-3"></i>Contáctanos</h1>
+            <p>Estamos aquí para ayudarte. Escríbenos y te responderemos pronto</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="contact-container">
+                    <h2 class="mb-4" style="color: var(--secondary-color);">Envíanos un Mensaje</h2>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>¡Mensaje enviado correctamente!</strong> Nos pondremos en contacto contigo pronto.
+                    </div>
+
+                    <form id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="nombre" class="form-label">
+                                    Nombre Completo <span class="required">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" 
+                                       placeholder="Ej: Juan Pérez García" required>
+                                <div class="error-message" id="errorNombre">
+                                    <i class="fas fa-exclamation-circle"></i> Por favor ingresa tu nombre completo
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">
+                                    Correo Electrónico <span class="required">*</span>
+                                </label>
+                                <input type="email" class="form-control" id="email" name="email" 
+                                       placeholder="ejemplo@correo.com" required>
+                                <div class="error-message" id="errorEmail">
+                                    <i class="fas fa-exclamation-circle"></i> Por favor ingresa un correo válido
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="telefono" class="form-label">
+                                    Teléfono <span class="required">*</span>
+                                </label>
+                                <input type="tel" 
+                                       class="form-control" 
+                                       id="telefono" 
+                                       name="telefono" 
+                                       pattern="[0-9]*"
+                                       maxlength="10"
+                                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                       placeholder="(998) 123-4567" 
+                                       required>
+                                <div class="error-message" id="errorTelefono">
+                                    <i class="fas fa-exclamation-circle"></i> Por favor ingresa un teléfono válido (10 dígitos)
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="asunto" class="form-label">
+                                    Asunto <span class="required">*</span>
+                                </label>
+                                <select class="form-select" id="asunto" name="asunto" required>
+                                    <option value="">Selecciona una opción</option>
+                                    <option value="cotizacion">Solicitud de Cotización</option>
+                                    <option value="disponibilidad">Consulta de Disponibilidad</option>
+                                    <option value="garantia">Garantías</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                                <div class="error-message" id="errorAsunto">
+                                    <i class="fas fa-exclamation-circle"></i> Por favor selecciona un asunto
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">
+                                Mensaje <span class="required">*</span>
+                            </label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" rows="5" 
+                                      placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            <div class="error-message" id="errorMensaje">
+                                <i class="fas fa-exclamation-circle"></i> Por favor escribe tu mensaje (mínimo 10 caracteres)
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="acepto" required>
+                            <label class="form-check-label" for="acepto">
+                                Acepto el tratamiento de mis datos personales <span class="required">*</span>
+                            </label>
+                            <div class="error-message" id="errorAcepto">
+                                <i class="fas fa-exclamation-circle"></i> Debes aceptar el tratamiento de datos
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                            </button>
+                            <button type="reset" class="btn btn-reset">
+                                <i class="fas fa-redo me-2"></i>Limpiar Formulario
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="info-box">
+                    <h3 class="mb-4"><i class="fas fa-info-circle me-2"></i>Información de Contacto</h3>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Dirección</strong><br>
+                            Av. Tulum #123, SM 50<br>
+                            Cancún, Quintana Roo, México
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Teléfono</strong><br>
+                            (998) 123-4567
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            contacto@autopartesmx.com
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Horario</strong><br>
+                            Lun - Vie: 9:00 - 19:00<br>
+                            Sábado: 9:00 - 14:00
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4 class="mb-3"><i class="fas fa-share-alt me-2"></i>Síguenos</h4>
+                    <div class="d-flex gap-3">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="#" onclick="alert('Aviso de Privacidad\n\nAutoPartes MX es responsable del tratamiento de tus datos personales.\n' +
+            'La información recabada (nombre, correo, teléfono y mensaje) se usa solo para dar seguimiento a tu solicitud.\n' +
+            'Tus datos no se comparten con terceros.\n\n' +
+            'Para ejercer tus derechos ARCO o más información, escribe a: privacidad@autopartesmx.com');">
+            Aviso de Privacidad
+            </a>
+            <p>&copy; 2025 AutoPartes MX. Todos los derechos reservados.</p>
+            <p><i class="fas fa-map-marker-alt"></i> Cancún, Quintana Roo, México</p>
+        </div>
+    </footer>
+     
+    
+</body>
+</html>
